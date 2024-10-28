@@ -1,0 +1,15 @@
+- name: Install Notepad++ on Windows
+  hosts: windows
+  tasks:
+    - name: Download installation script from GitHub
+      win_get_url:
+        url: "https://raw.githubusercontent.com/yourusername/ansible-test-package/main/install_notepadpp.ps1"
+        dest: C:\Temp\install_notepadpp.ps1
+
+    - name: Run the Notepad++ installation script
+      win_shell: PowerShell.exe -File C:\Temp\install_notepadpp.ps1
+
+    - name: Clean up the installation script
+      win_file:
+        path: C:\Temp\install_notepadpp.ps1
+        state: absent
